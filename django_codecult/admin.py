@@ -3,3 +3,4 @@ from django_codecult.models import *
 
 admin.site.register(Block)
 admin.site.register(Page)
+admin.site.register(Index)

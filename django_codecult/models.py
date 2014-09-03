@@ -25,3 +25,12 @@ class Page(models.Model):
 
 	def __unicode__(self):
 		return unicode(self.title)
+
+class Index(models.Model):
+	blocks = models.ManyToManyField(Block)
+
+	def __repr__(self):
+		return '%s' % ("index")
+
+	def __unicode__(self):
+		return unicode("index")		
