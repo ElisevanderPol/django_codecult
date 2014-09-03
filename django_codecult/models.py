@@ -1,16 +1,5 @@
 from django.db import models
 
-class Top(models.Model):
-    image = models.URLField(max_length=255, null=True, blank=True)
-    title = models.CharField(max_length=255)
-    description = models.TextField(null=True, blank=True)
-
-    def __repr__(self):
-        return '%s' % (self.title)
-
-    def __unicode__(self):
-        return unicode(self.title)
-
 class Block(models.Model):
 	image = models.URLField(max_length=255, null=True, blank=True)
 	title = models.CharField(max_length=255)
@@ -22,10 +11,17 @@ class Block(models.Model):
 	href = "#" + str(title)
 
 	def __repr__(self):
-        return '%s' % (self.title)
+		return '%s' % (self.title)
 
-    def __unicode__(self):
-        return unicode(self.title)
+	def __unicode__(self):
+		return unicode(self.title)
 
 class Page(models.Model):
-	pass
+	title = models.CharField(max_length=255, unique=True)
+	blocks = models.ManyToManyField(Block)
+
+	def __repr__(self):
+		return '%s' % (self.title)
+
+	def __unicode__(self):
+		return unicode(self.title)
