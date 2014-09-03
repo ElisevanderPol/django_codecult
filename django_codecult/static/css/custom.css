@@ -1,0 +1,11 @@
+.block {
+	border: 1px solid #000;
+}
+
+.block-title {
+	font-weight: bold;
+}
+
+.block-description {
+	font-style: italic;
+}

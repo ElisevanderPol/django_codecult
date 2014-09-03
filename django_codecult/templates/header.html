@@ -1,0 +1,14 @@
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+    Menu
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+  	{% for page in pages %}
+	    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'django_codecult.views.info' page.title %}">{{page.title}}</a></li>
+	{% endfor %}
+	<li role="presentation" class="divider"></li>
+	<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'django_codecult.views.home' %}">Home</a></li>
+  </ul>
+</div>
+</div>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div>{{ page.title }}</div>
+{% for block in blocks %}
+	<div class="block">
+		<div class="block-title"> {{ block.title }} </div>
+		{% if block.description %}
+			<div class="block-description"> {{ block.description }} </div>
+		{% endif %}
+	</div>
+{% endfor %}
+
+
+
+{% endblock body %}
