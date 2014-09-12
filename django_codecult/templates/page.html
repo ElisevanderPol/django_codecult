@@ -2,14 +2,36 @@
 
 {% block body %}
 
-<div>{{ page.title }}</div>
-{% for block in blocks %}
-	<div class="block">
-		<div class="block-title"> {{ block.title }} </div>
-		{% if block.description %}
-			<div class="block-description"> {{ block.description }} </div>
+{% for block in blocks_even %}
+
+	{% if block.0.image %}
+	<div class="block first">
+		<img class="decor-image" src = "{{ block.0.image }}">
+	{% else %}
+	<div class="block first no-image">
+	{% endif %}
+		<div class="block-title"> {{ block.0.title }} </div>
+		{% if block.0.description %}
+			<div class="col-lg-4"></div>
+			<div class="block-description col-lg-4"> {{ block.0.description }} </div>
+			<div class="col-lg-4"></div>
 		{% endif %}
 	</div>
+	{% if block.1 %}
+	{% if block.1.image %}
+	<div class="block second">
+		<img class="decor-image" src = "{{ block.1.image }}">
+	{% else %}
+	<div class="block second no-image">
+	{% endif %}
+		<div class="block-title"> {{ block.1.title }} </div>
+		{% if block.1.description %}
+			<div class="col-lg-4"></div>
+			<div class="block-description col-lg-4"> {{ block.1.description }} </div>
+			<div class="col-lg-4"></div>
+		{% endif %}
+	</div>
+	{% endif %}
 {% endfor %}
 
 

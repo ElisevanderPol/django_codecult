@@ -1,11 +1,87 @@
+/* Styling of custom page blocks */
 .block {
-	border: 1px solid #000;
+	height: 500px;
+	text-align: center;
 }
 
+/* Styling for first block type */
+.first {
+	background-color: #18bc9c;
+	color: #ffffff;
+}
+
+/* Styling for second block type */
+.second {
+	background-color: #ffffff;
+	color: #2c3e50;
+}
+
+/* Styling when there is no image */
+.no-image {
+	height:300px;
+}
+
+/* Styling of title for custom page block */
 .block-title {
+	font-size: 300%;
 	font-weight: bold;
+	text-align: center;
+	text-transform: uppercase;
 }
 
+/* Styling of content for custom page block */
 .block-description {
 	font-style: italic;
+	margin-left: auto;
+	margin-right: auto;
+	padding:100px;
+	text-align: left;
 }
+
+/* Styling of decoration image for custom page block */
+.decor-image {
+	max-height:200px;
+	margin-top:10px;
+}
+
+/* Styling for block container */
+.main {
+	padding-top: 75px;
+	padding-bottom: 50px;
+}
+
+/* Styling for the top menu */
+.top {
+	background-color: #2c3e50;
+}
+
+/* Styling for the footer */
+.bottom {
+	background-color: #2c3e50;
+	color: #ffffff;
+	text-align: center;
+}
+
+/* Background color for entire page */
+body, .main {
+	background-color: #2c3e50;
+}
+
+/* Styling for navigation buttons */
+.nav-justified > li > a.page-button {
+	background-color: #2c3e50;
+	color: #ffffff;
+	border-radius: 5px;
+	margin:5px;
+}
+
+.nav-justified > li > a.page-button:hover {
+	color: #18bc9c;
+	background-color: #2c3e50;
+}
+
+/* Styling for title navigation */
+.navigation-big {
+	font-size: 200%;
+}
+
