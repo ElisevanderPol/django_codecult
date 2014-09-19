@@ -6,29 +6,29 @@ def home(request):
 	page_list = Page.objects.all()
 	page = Index.objects.all()
 	block_list = page[0].blocks.all()
-	block_list_even = []
+	block_list_tuples = []
 	for i in range(0, len(block_list)):
 		if(i%2 == 0 and i is not len(block_list)-1):
-			block_list_even.append([block_list[i], block_list[i+1]])
+			block_list_tuples.append([block_list[i], block_list[i+1]])
 		elif(i%2 == 0):
-			block_list_even.append([block_list[i]])
+			block_list_tuples.append([block_list[i]])
 	return render(request, 'index.html', {
 		'pages': page_list,
-		'blocks_even': block_list_even,
+		'block_tuple': block_list_tuples,
 		})
 
 def info(request, page_title):
 	page_list = Page.objects.all()
 	page = Page.objects.get(title=page_title)
 	block_list = page.blocks.all()
-	block_list_even = []
+	block_list_tuples = []
 	for i in range(0, len(block_list)):
 		if(i%2 == 0 and i is not len(block_list)-1):
-			block_list_even.append([block_list[i], block_list[i+1]])
+			block_list_tuples.append([block_list[i], block_list[i+1]])
 		elif(i%2 == 0):
-			block_list_even.append([block_list[i]])
+			block_list_tuples.append([block_list[i]])
 	return render(request, 'page.html', {
 		'pages': page_list,
 		'page': page,
-		'blocks_even': block_list_even,
+		'block_tuple': block_list_tuples,
 		})

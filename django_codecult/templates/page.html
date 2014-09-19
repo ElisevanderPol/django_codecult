@@ -2,36 +2,118 @@
 
 {% block body %}
 
-{% for block in blocks_even %}
+{% for block in block_tuple %}
 
 	{% if block.0.image %}
-	<div class="block first">
-		<img class="decor-image" src = "{{ block.0.image }}">
+	<!-- image takes up 4 columns -->
+	<div class="block first col-lg-12">
+		<div class="row">
+			<div class="col-lg-4"></div>
+			<img class="decor-image col-lg-4" src = "{{ block.0.image }}">
+			<div class="col-lg-4"></div>
+		</div>
 	{% else %}
-	<div class="block first no-image">
+	<!-- if there is no image the entire block is smaller -->
+	<div class="block first no-image col-lg-12">
 	{% endif %}
-		<div class="block-title"> {{ block.0.title }} </div>
+
+		<!-- title takes up 6 columns -->
+		<div class="row">
+			<div class="col-lg-3"></div>
+			<div class="block-title col-lg-6"> {{ block.0.title }} </div>
+			<div class="col-lg-3"></div>
+		</div>
+
 		{% if block.0.description %}
-			<div class="col-lg-4"></div>
-			<div class="block-description col-lg-4"> {{ block.0.description }} </div>
-			<div class="col-lg-4"></div>
+			<!-- Description/text takes up 6 columns -->
+			<div class="row">
+				<div class="col-lg-3"></div>
+				<div class="block-description col-lg-6"> {{ block.0.description }} </div>
+				<div class="col-lg-3"></div>
+			</div>
+		{% endif %}
+
+		{% if block.0.pro_con_list %}
+		<!-- Pro/Con-list takes up 8 columns -->
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<!-- Pro-list takes up 4 columns -->
+			<div class="pro col-lg-4">
+				<ul>
+				{% for pro in block.0.pro_con_list.get_pro_list %}
+				<li> {{ pro }} </li>
+				{% endfor %}
+			</ul>
+			</div>
+			<!-- Con-list takes up 4 columns -->
+			<div class="con col-lg-4">
+				<ul>
+				{% for con in block.0.pro_con_list.get_con_list %}
+				<li> {{ con }} </li>
+				{% endfor %}
+				</ul>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
 		{% endif %}
 	</div>
-	{% if block.1 %}
+
+{% if block.1 %}
 	{% if block.1.image %}
-	<div class="block second">
-		<img class="decor-image" src = "{{ block.1.image }}">
+	<!-- image takes up 4 columns -->
+	<div class="block second col-lg-12">
+		<div class="row">
+			<div class="col-lg-4"></div>
+			<img class="decor-image col-lg-4" src = "{{ block.0.image }}">
+			<div class="col-lg-4"></div>
+		</div>
 	{% else %}
-	<div class="block second no-image">
+	<!-- if there is no image the entire block is smaller -->
+	<div class="block second no-image col-lg-12">
 	{% endif %}
-		<div class="block-title"> {{ block.1.title }} </div>
+
+		<!-- title takes up 6 columns -->
+		<div class="row">
+			<div class="col-lg-3"></div>
+			<div class="block-title col-lg-6"> {{ block.1.title }} </div>
+			<div class="col-lg-3"></div>
+		</div>
+
 		{% if block.1.description %}
-			<div class="col-lg-4"></div>
-			<div class="block-description col-lg-4"> {{ block.1.description }} </div>
-			<div class="col-lg-4"></div>
+			<!-- Description/text takes up 6 columns -->
+			<div class="row">
+				<div class="col-lg-3"></div>
+				<div class="block-description col-lg-6"> {{ block.1.description }} </div>
+				<div class="col-lg-3"></div>
+			</div>
+		{% endif %}
+
+		{% if block.1.pro_con_list %}
+		<!-- Pro/Con-list takes up 8 columns -->
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<!-- Pro-list takes up 4 columns -->
+			<div class="pro col-lg-4">
+				<ul>
+				{% for pro in block.1.pro_con_list.get_pro_list %}
+				<li> {{ pro }} </li>
+				{% endfor %}
+			</ul>
+			</div>
+			<!-- Con-list takes up 4 columns -->
+			<div class="con col-lg-4">
+				<ul>
+				{% for con in block.1.pro_con_list.get_con_list %}
+				<li> {{ con }} </li>
+				{% endfor %}
+				</ul>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
 		{% endif %}
 	</div>
 	{% endif %}
+
 {% endfor %}
 
 

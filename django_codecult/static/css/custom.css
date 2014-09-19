@@ -2,6 +2,7 @@
 .block {
 	height: 500px;
 	text-align: center;
+	overflow: auto;
 }
 
 /* Styling for first block type */
@@ -34,13 +35,13 @@
 	font-style: italic;
 	margin-left: auto;
 	margin-right: auto;
-	padding:100px;
+	padding:50px;
 	text-align: left;
 }
 
 /* Styling of decoration image for custom page block */
 .decor-image {
-	max-height:200px;
+	max-width:100%;
 	margin-top:10px;
 }
 
@@ -84,4 +85,5 @@ body, .main {
 .navigation-big {
 	font-size: 200%;
 }
+
 
