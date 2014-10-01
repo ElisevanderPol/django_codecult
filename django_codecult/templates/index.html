@@ -56,8 +56,21 @@
 		</div>
 		{% endif %}
 		{% if block.0.image_slider %}
-		<div class="col-lg-8">
-			{{ block.0.image_slider.0 }}
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8">
+				<span id="image-visible" class="0"><img id="image-slider-img" src="{{ block.0.image_slider.get_image_urls.0 }}"></span>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8">
+				{% for i in block.0.image_slider.get_image_urls %}
+				<div id="{{ forloop.counter0 }}" class="slider-button"> {{ forloop.counter }}  <img src="{{ i }}" class="hide"> </div>
+				{% endfor %}
+			</div>
+			<div class="col-lg-2"></div>
 		</div>
 		{% endif %}
 	</div>
