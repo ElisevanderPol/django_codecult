@@ -119,3 +119,19 @@ body, .main {
 	color: #ffffff;
 	border: 1px solid #ffffff;
 }
+
+.pro>ul {
+	list-style-type: none;
+	text-align: left;
+	margin-left: 0;
+	padding-left: 1em;
+	text-indent: -1em;
+}
+
+.con>ul {
+	list-style-type: none;
+	text-align: left;
+	margin-left: 0;
+	padding-left: 1em;
+	text-indent: -1em;
+}
