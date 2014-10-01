@@ -11,5 +11,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'django_codecult.views.home', name='home'),
     url(r'^info/(?P<page_title>\w+)$', 'django_codecult.views.info', name='info'),
+    url(r'^summernote/', include('django_summernote.urls')),
     
 )

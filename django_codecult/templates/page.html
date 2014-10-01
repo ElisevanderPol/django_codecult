@@ -56,6 +56,11 @@
 			<div class="col-lg-2"></div>
 		</div>
 		{% endif %}
+		{% if block.0.image_slider %}
+		<div class="col-lg-8">
+			{{ block.0.image_slider.0 }}
+		</div>
+		{% endif %}
 	</div>
 
 {% if block.1 %}

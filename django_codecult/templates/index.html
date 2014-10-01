@@ -55,6 +55,11 @@
 			<div class="col-lg-2"></div>
 		</div>
 		{% endif %}
+		{% if block.0.image_slider %}
+		<div class="col-lg-8">
+			{{ block.0.image_slider.0 }}
+		</div>
+		{% endif %}
 	</div>
 
 {% if block.1 %}
@@ -106,6 +111,24 @@
 				<li> {{ con }} </li>
 				{% endfor %}
 				</ul>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+		{% endif %}
+		{% if block.1.image_slider %}
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8">
+				<img src="{{ block.1.image_slider.get_image_urls.0 }}">
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8">
+				{% for i in block.1.image_slider.get_image_urls %}
+				<span>image: {{i}}</span>
+				{% endfor %}
 			</div>
 			<div class="col-lg-2"></div>
 		</div>

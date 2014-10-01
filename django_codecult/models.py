@@ -17,6 +17,19 @@ class Listblock(models.Model):
 	def __unicode__(self):
 		return unicode(self.title)
 
+class Imageslider(models.Model):
+	title = models.CharField(null=True, max_length=255)
+	images = models.TextField(null=True, blank=True)
+
+	def get_image_urls(self):
+		return self.images.split(',')
+		
+	def __repr__(self):
+		return '%s' % (self.title)
+
+	def __unicode__(self):
+		return unicode(self.title)		
+
 class Block(models.Model):
 	image = models.URLField(max_length=255, null=True, blank=True)
 	title = models.CharField(max_length=255)
@@ -26,6 +39,7 @@ class Block(models.Model):
 	third_party = models.BooleanField(default=False)
 	href = "#" + str(title)
 	pro_con_list = models.ForeignKey(Listblock, blank=True, null=True)
+	image_slider = models.ForeignKey(Imageslider, blank=True, null=True)
 
 	def __repr__(self):
 		return '%s' % (self.title)
@@ -36,6 +50,7 @@ class Block(models.Model):
 class Page(models.Model):
 	title = models.CharField(max_length=255, unique=True)
 	blocks = models.ManyToManyField(Block)
+
 
 	def __repr__(self):
 		return '%s' % (self.title)
