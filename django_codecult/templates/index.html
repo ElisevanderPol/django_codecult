@@ -72,7 +72,6 @@
 			<div class="col-lg-4"></div>
 		</div>
 	{% else %}
-	<!-- if there is no image the entire block is smaller -->
 	<div class="block second no-image col-lg-12">
 	{% endif %}
 
@@ -119,7 +118,7 @@
 		<div class="row">
 			<div class="col-lg-2"></div>
 			<div class="col-lg-8">
-				<img src="{{ block.1.image_slider.get_image_urls.0 }}">
+				<span id="image-visible" class="0"><img id="image-slider-img" src="{{ block.1.image_slider.get_image_urls.0 }}"></span>
 			</div>
 			<div class="col-lg-2"></div>
 		</div>
@@ -127,7 +126,7 @@
 			<div class="col-lg-2"></div>
 			<div class="col-lg-8">
 				{% for i in block.1.image_slider.get_image_urls %}
-				<span>image: {{i}}</span>
+				<div id="{{ forloop.counter0 }}" class="slider-button"> {{ forloop.counter }}  <img src="{{ i }}" class="hide"> </div>
 				{% endfor %}
 			</div>
 			<div class="col-lg-2"></div>

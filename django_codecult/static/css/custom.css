@@ -63,6 +63,10 @@
 	text-align: center;
 }
 
+.hide {
+	visibility: hidden;
+}
+
 /* Background color for entire page */
 body, .main {
 	background-color: #2c3e50;
@@ -86,4 +90,32 @@ body, .main {
 	font-size: 200%;
 }
 
+/* Styling for image slider */
+#image-slider-img {
+	height:200px;
+}
 
+/* Styling for image slider buttons */
+.slider-button {
+	width:24px;
+	height:24px;
+	background-color: #2c3e50;
+	color: #ffffff;
+	border-radius:25px;
+	margin:5px;
+	text-align: center;
+	display: inline-block;
+	border: 1px solid #ffffff;
+}
+
+.selected-button {
+	background-color: #ffffff;
+	color: #2c3e50;
+	border: 1px solid #2c3e50;
+}
+
+.not-selected {
+	background-color: #2c3e50;
+	color: #ffffff;
+	border: 1px solid #ffffff;
+}
