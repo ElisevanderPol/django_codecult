@@ -1,8 +1,6 @@
 /* Styling of custom page blocks */
 .block {
-	height: 500px;
 	text-align: center;
-	overflow: auto;
 }
 
 /* Styling for first block type */
@@ -15,11 +13,6 @@
 .second {
 	background-color: #ffffff;
 	color: #2c3e50;
-}
-
-/* Styling when there is no image */
-.no-image {
-	height:300px;
 }
 
 /* Styling of title for custom page block */
@@ -41,8 +34,13 @@
 
 /* Styling of decoration image for custom page block */
 .decor-image {
-	max-width:100%;
 	margin-top:10px;
+	text-align: center;
+}
+
+.block-img {
+	max-height:400px;
+	width:auto;
 }
 
 /* Styling for block container */
@@ -105,7 +103,6 @@ body, .main {
 	margin:5px;
 	text-align: center;
 	display: inline-block;
-	border: 1px solid #ffffff;
 }
 
 .selected-button {
@@ -120,18 +117,9 @@ body, .main {
 	border: 1px solid #ffffff;
 }
 
-.pro>ul {
-	list-style-type: none;
+.pro,.con>ul {
 	text-align: left;
 	margin-left: 0;
-	padding-left: 1em;
-	text-indent: -1em;
-}
-
-.con>ul {
-	list-style-type: none;
-	text-align: left;
-	margin-left: 0;
-	padding-left: 1em;
-	text-indent: -1em;
+	text-indent: -1px;
+	margin:5px;
 }

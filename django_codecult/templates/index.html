@@ -1,152 +1,100 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
+
 {% block body %}
 
-{% for block in block_tuple %}
-	{% if block.0.image %}
-	<!-- image takes up 4 columns -->
-	<div class="block first col-lg-12">
-		<div class="row">
-			<div class="col-lg-4"></div>
-			<img class="decor-image col-lg-4" src = "{{ block.0.image }}">
-			<div class="col-lg-4"></div>
-		</div>
+<!-- Loop through block list and insert blocks -->
+{% for block in block_list %}
+	
+	<!-- Different color schemes for different blocks -->
+	{% if forloop.counter0|divisibleby:"2" %}
+		<div class="block first col-lg-12">
 	{% else %}
-	<!-- if there is no image the entire block is smaller -->
-	<div class="block first no-image col-lg-12">
-	{% endif %}
+		<div class="block second col-lg-12">
+	{% endif %}		
 
-		<!-- title takes up 6 columns -->
-		<div class="row">
-			<div class="col-lg-3"></div>
-			<div class="block-title col-lg-6"> {{ block.0.title }} </div>
-			<div class="col-lg-3"></div>
-		</div>
-
-		{% if block.0.description %}
-			<!-- Description/text takes up 6 columns -->
+		<!-- If an image is provided -->
+		{% if block.image %}
 			<div class="row">
 				<div class="col-lg-3"></div>
-				<div class="block-description col-lg-6"> {{ block.0.description }} </div>
+				<div class="decor-image col-lg-6" ><img class="block-img" src = "{{ block.image }}"></div>
 				<div class="col-lg-3"></div>
 			</div>
 		{% endif %}
 
-		{% if block.0.pro_con_list %}
-		<!-- Pro/Con-list takes up 8 columns -->
-		<div class="row">
-			<div class="col-lg-2"></div>
-			<!-- Pro-list takes up 4 columns -->
-			<div class="pro col-lg-4">
-				<ul>
-				{% for pro in block.0.pro_con_list.get_pro_list %}
-				<li> {{ pro }} </li>
-				{% endfor %}
-			</ul>
-			</div>
-			<!-- Con-list takes up 4 columns -->
-			<div class="con col-lg-4">
-				<ul>
-				{% for con in block.0.pro_con_list.get_con_list %}
-				<li> {{ con }} </li>
-				{% endfor %}
-				</ul>
-			</div>
-			<div class="col-lg-2"></div>
-		</div>
-		{% endif %}
-		{% if block.0.image_slider %}
-		<div class="row">
-			<div class="col-lg-2"></div>
-			<div class="col-lg-8">
-				<span id="image-visible" class="0"><img id="image-slider-img" src="{{ block.0.image_slider.get_image_urls.0 }}"></span>
-			</div>
-			<div class="col-lg-2"></div>
-		</div>
-		<div class="row">
-			<div class="col-lg-2"></div>
-			<div class="col-lg-8">
-				{% for i in block.0.image_slider.get_image_urls %}
-				<div id="{{ forloop.counter0 }}" class="slider-button"> {{ forloop.counter }}  <img src="{{ i }}" class="hide"> </div>
-				{% endfor %}
-			</div>
-			<div class="col-lg-2"></div>
-		</div>
-		{% endif %}
-	</div>
-
-{% if block.1 %}
-	{% if block.1.image %}
-	<!-- image takes up 4 columns -->
-	<div class="block second col-lg-12">
-		<div class="row">
-			<div class="col-lg-4"></div>
-			<img class="decor-image col-lg-4" src = "{{ block.0.image }}">
-			<div class="col-lg-4"></div>
-		</div>
-	{% else %}
-	<div class="block second no-image col-lg-12">
-	{% endif %}
-
-		<!-- title takes up 6 columns -->
+		<!-- Title of block -->
 		<div class="row">
 			<div class="col-lg-3"></div>
-			<div class="block-title col-lg-6"> {{ block.1.title }} </div>
+			<div class="block-title col-lg-6"> {{ block.title }} </div>
 			<div class="col-lg-3"></div>
 		</div>
 
-		{% if block.1.description %}
-			<!-- Description/text takes up 6 columns -->
+		<!-- If there is text in the block -->
+		{% if block.description %}
 			<div class="row">
 				<div class="col-lg-3"></div>
-				<div class="block-description col-lg-6"> {{ block.1.description }} </div>
+				<div class="block-description col-lg-6"> {{ block.description |safe }} </div>
 				<div class="col-lg-3"></div>
 			</div>
 		{% endif %}
 
-		{% if block.1.pro_con_list %}
-		<!-- Pro/Con-list takes up 8 columns -->
-		<div class="row">
-			<div class="col-lg-2"></div>
-			<!-- Pro-list takes up 4 columns -->
-			<div class="pro col-lg-4">
-				<ul>
-				{% for pro in block.1.pro_con_list.get_pro_list %}
-				<li> {{ pro }} </li>
-				{% endfor %}
-			</ul>
+		<!-- If there is a pro/con list -->
+		{% if block.pro_con_list %}
+			<div class="row">
+				<div class="col-lg-2"></div>
+				<!-- Pro-list -->
+				<div class="pro col-lg-4">
+					<ul>
+						<img src="{% static 'img/plus.png' %}">		
+						{% for pro in block.pro_con_list.get_pro_list %}
+							<li> 
+								{{ pro }} 
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<!-- Con-list -->
+				<div class="con col-lg-4">
+					<ul>
+						<img src="{% static 'img/minus.png' %}">		
+						{% for con in block.pro_con_list.get_con_list %}
+							<li> 
+								{{ con }} 
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="col-lg-2"></div>
 			</div>
-			<!-- Con-list takes up 4 columns -->
-			<div class="con col-lg-4">
-				<ul>
-				{% for con in block.1.pro_con_list.get_con_list %}
-				<li> {{ con }} </li>
-				{% endfor %}
-				</ul>
-			</div>
-			<div class="col-lg-2"></div>
-		</div>
 		{% endif %}
-		{% if block.1.image_slider %}
-		<div class="row">
-			<div class="col-lg-2"></div>
-			<div class="col-lg-8">
-				<span id="image-visible" class="0"><img id="image-slider-img" src="{{ block.1.image_slider.get_image_urls.0 }}"></span>
+
+		<!-- If there is an image slider -->
+		{% if block.image_slider %}
+			<!-- Visible image -->
+			<div class="row">
+				<div class="col-lg-2"></div>
+				<div class="col-lg-8">
+					<span id="image-visible" class="0">
+						<img id="image-slider-img" src="{{ block.image_slider.get_image_urls.0 }}">
+					</span>
+				</div>
+				<div class="col-lg-2"></div>
 			</div>
-			<div class="col-lg-2"></div>
-		</div>
-		<div class="row">
-			<div class="col-lg-2"></div>
-			<div class="col-lg-8">
-				{% for i in block.1.image_slider.get_image_urls %}
-				<div id="{{ forloop.counter0 }}" class="slider-button"> {{ forloop.counter }}  <img src="{{ i }}" class="hide"> </div>
-				{% endfor %}
+			<!-- All images, hidden for now -->
+			<div class="row">
+				<div class="col-lg-2"></div>
+				<div class="col-lg-8">
+					{% for i in block.image_slider.get_image_urls %}
+						<div id="{{ forloop.counter0 }}" class="slider-button"> {{ forloop.counter }}  
+							<img src="{{ i }}" class="hide"> 
+						</div>
+					{% endfor %}
+				</div>
+				<div class="col-lg-2"></div>
 			</div>
-			<div class="col-lg-2"></div>
-		</div>
 		{% endif %}
 	</div>
-	{% endif %}
 {% endfor %}
 
 {% endblock body %}

@@ -16,5 +16,6 @@ admin.site.register(Listblock)
 admin.site.register(Page, AdminPage)
 admin.site.register(Index, AdminIndex)
 admin.site.register(Imageslider)
+admin.site.register(Contactbuttons)
 
 

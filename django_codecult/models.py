@@ -17,6 +17,19 @@ class Listblock(models.Model):
 	def __unicode__(self):
 		return unicode(self.title)
 
+class Contactbuttons(models.Model):
+	title = models.CharField(null=True, max_length=255)
+	facebook = models.URLField(null=True, max_length=255, blank=True)
+	twitter = models.URLField(null=True, max_length=255, blank=True)
+	gplus = models.URLField(null=True, max_length=255, blank=True)
+	mail = models.URLField(null=True, max_length=255, blank=True)
+	
+	def __repr__(self):
+		return '%s' % (self.title)
+
+	def __unicode__(self):
+		return unicode(self.title)	
+
 class Imageslider(models.Model):
 	title = models.CharField(null=True, max_length=255)
 	images = models.TextField(null=True, blank=True)
@@ -40,6 +53,7 @@ class Block(models.Model):
 	href = "#" + str(title)
 	pro_con_list = models.ForeignKey(Listblock, blank=True, null=True)
 	image_slider = models.ForeignKey(Imageslider, blank=True, null=True)
+	contact_buttons = models.ForeignKey(Contactbuttons, blank=True, null=True)
 
 	def __repr__(self):
 		return '%s' % (self.title)
@@ -50,7 +64,6 @@ class Block(models.Model):
 class Page(models.Model):
 	title = models.CharField(max_length=255, unique=True)
 	blocks = models.ManyToManyField(Block)
-
 
 	def __repr__(self):
 		return '%s' % (self.title)
