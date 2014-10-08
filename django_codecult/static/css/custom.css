@@ -1,6 +1,7 @@
 /* Styling of custom page blocks */
 .block {
 	text-align: center;
+	word-wrap: break-word;
 }
 
 /* Styling for first block type */
@@ -122,4 +123,39 @@ body, .main {
 	margin-left: 0;
 	text-indent: -1px;
 	margin:5px;
+}
+
+/* Styling for social buttons */
+.social-button {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    border: 3px solid #ffffff;
+    border-radius: 100%;
+    text-align: center;
+    font-size: 15px;
+    line-height: 30px;
+    color: #ffffff;
+}
+
+.social-button:hover{
+	color: #18bc9c;
+	background-color: #ffffff;
+}
+
+.social-button-inverse {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    border: 3px solid #18bc9c;
+    border-radius: 100%;
+    text-align: center;
+    font-size: 15px;
+    line-height: 30px;
+    color: #18bc9c;	
+}
+
+.social-button-inverse:hover{
+	color:#ffffff;
+	background-color: #18bc9c;
 }

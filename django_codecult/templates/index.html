@@ -13,7 +13,13 @@
 	{% else %}
 		<div class="block second col-lg-12">
 	{% endif %}		
-
+	
+		<!-- Title of block -->
+		<div class="row">
+			<div class="col-lg-3"></div>
+			<div class="block-title col-lg-6"> {{ block.title }} </div>
+			<div class="col-lg-3"></div>
+		</div>
 		<!-- If an image is provided -->
 		{% if block.image %}
 			<div class="row">
@@ -23,13 +29,23 @@
 			</div>
 		{% endif %}
 
-		<!-- Title of block -->
-		<div class="row">
-			<div class="col-lg-3"></div>
-			<div class="block-title col-lg-6"> {{ block.title }} </div>
-			<div class="col-lg-3"></div>
-		</div>
-
+		<!-- If there are contact buttons -->
+		{% if block.contact_buttons %}
+			<ul class="list-inline">
+				<h3>{{block.contact_buttons.title}}</h3>
+				{% if forloop.counter0|divisibleby:"2" %}
+					<li><a href="{{ block.contact_buttons.facebook }}" target="_blank" class="social-button"><i class="fa fa-fw fa-facebook"></i></a></li>
+					<li><a href="{{ block.contact_buttons.twitter }}" target="_blank" class="social-button"><i class="fa fa-fw fa-google-plus"></i></a></li>
+					<li><a href="{{ block.contact_buttons.gplus }}" target="_blank" class="social-button"><i class="fa fa-fw fa-twitter"></i></a></li>
+					<li><a href="{{ block.contact_buttons.mail }}" target="_blank" class="social-button"><i class ="fa fa-fw fa-envelope"></i></a></li>
+				{% else %}
+					<li><a href="{{ block.contact_buttons.facebook }}" target="_blank" class="social-button-inverse"><i class="fa fa-fw fa-facebook"></i></a></li>
+					<li><a href="{{ block.contact_buttons.twitter }}" target="_blank" class="social-button-inverse"><i class="fa fa-fw fa-google-plus"></i></a></li>
+					<li><a href="{{ block.contact_buttons.gplus }}" target="_blank" class="social-button-inverse"><i class="fa fa-fw fa-twitter"></i></a></li>
+					<li><a href="{{ block.contact_buttons.mail }}" target="_blank" class="social-button-inverse"><i class ="fa fa-fw fa-envelope"></i></a></li>
+				{% endif %}
+			</ul>
+		{% endif %}
 		<!-- If there is text in the block -->
 		{% if block.description %}
 			<div class="row">
