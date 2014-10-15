@@ -6,7 +6,6 @@ def home(request):
 	page_list = Page.objects.all()
 	page = Index.objects.all()
 	block_list = page[0].blocks.all()
-	print block_list
 	return render(request, 'index.html', {
 		'pages': page_list,
 		'block_list': block_list,
