@@ -42,7 +42,7 @@ def user_login(request):
 	else:
 		state = "Deze gebruikersnaam/wachtwoord-combinatie is niet geldig."
 
-	return render(request, 'login.html', {
+	return render(request, 'index.html', {
 	'state':state, 
 	'username': username
 	})	

@@ -1,18 +1,20 @@
-{% extends "base.html" %}
-
-{% load staticfiles %}
-
-{% block body %}
-
-{{ state }}
-	<form action="/login/" method="post">
-		{% csrf_token %} 
-		username:
-		<input type="text" name="username" value="{{ username}}" /><br />
-		password:
-		<input type="password" name="password" value="" /><br />
-
-		<input type="submit" value="Log In" />
-	</form>	
-
-{% endblock body %}
+<div class="login-form">
+	<div class="row">
+		<div class="col-lg-6"></div>
+		<div class="col-lg-6">
+			<form action="/login/" method="post"> 
+				{% if next %}
+				bapa
+					<input type="hidden" name="next" value="{{ next }}" />
+				{% endif %}
+				{% csrf_token %}
+				<span class="user-info">{{ state }}</span><br />
+				<span class="user-info">Gebruikersnaam:
+				<input type="text" name="username" value="{{ username}}" /></span>
+				<span class="user-info">Wachtwoord:
+				<input type="password" name="password" value="" /></span>
+				<input type="submit" value="Log In" />
+			</form>	
+		</div>
+	</div>
+</div>
