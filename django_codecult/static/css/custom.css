@@ -33,6 +33,14 @@
 	text-align: left;
 }
 
+/* Styling for content of login/logout/signup blocks */
+.block-accounts {
+	margin-left: auto;
+	margin-right: auto;
+	padding:50px;
+	text-align: left;
+}
+
 /* Styling of decoration image for custom page block */
 .decor-image {
 	margin-top:10px;
@@ -158,4 +166,8 @@ body, .main {
 .social-button-inverse:hover{
 	color:#ffffff;
 	background-color: #18bc9c;
+}
+
+.user-info {
+	color: #ffffff;
 }

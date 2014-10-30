@@ -1,0 +1,24 @@
+[
+       {       
+               "pk": 1, 
+               "model": "sites.site", 
+               "fields": 
+                       {
+                               "domain": "http://127.0.0.1:8000", 
+                               "name": "codecult"
+                       }
+       },
+       {
+           "pk": 2, 
+        "model": "socialaccount.socialapp", 
+        "fields": 
+            {
+                "name": "Code Cult", 
+                "sites": [1], 
+                "secret": "ask Robrecht", 
+                "client_id": "ask Robrecht", 
+                "key": "", 
+                "provider": "facebook"
+            }
+    }
+]

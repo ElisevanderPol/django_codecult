@@ -27,22 +27,3 @@ def info(request, page_title):
 		'page': page,
 		'block_list': block_list,
 		})
-
-def user_login(request):
-	state = "Meld je aan.."
-	username = request.POST.get('username')
-	password = request.POST.get('password')
-	user = authenticate(username=username, password=password)
-	if user is not None:
-		if user.is_active:
-			login(request, user)
-			state = "Welkom terug bij CodeCult!"
-		else:
-			state = "Deze gebruiker is niet actief."
-	else:
-		state = "Deze gebruikersnaam/wachtwoord-combinatie is niet geldig."
-
-	return render(request, 'index.html', {
-	'state':state, 
-	'username': username
-	})	
