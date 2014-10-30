@@ -67,6 +67,7 @@
 .main {
 	padding-top: 75px;
 	padding-bottom: 50px;
+	margin-top:30px;
 }
 
 /* Styling for the top menu */
@@ -186,6 +187,7 @@ body, .main {
 button.account {
 	background-color: #2c3e50;
 	border:none;
+	border-radius: 3px;
 }
 
 button.account:hover{
@@ -194,15 +196,58 @@ button.account:hover{
 	border:none;
 }
 
+button.account-top{
+	background-color: #18bc9c;
+	border:none;
+	border-radius:3px;
+}
+
+button.account-top:hover{
+	background-color: #ffffff;
+	color: #18bc9c;
+	border:none;
+}
+
+a.account-top{
+	color:#ffffff;
+	text-decoration: none;
+}
+
+a.account-top:hover{
+	color:#ffffff;
+	text-decoration: none;
+	border-bottom: 1px dotted #ffffff;
+}
+
 input {
 	color: #2c3e50;
+}
+
+.mini-accounts {
+	height:30px;
+	background-color: #2c3e50;
+	color: #ffffff;
 }
 
 .footer-link {
 	color: #18bc9c;
 }
+
 .footer-link:hover {
 	color: #ffffff;
 	border-bottom: 1px dotted #ffffff;
 	text-decoration: none;
+}
+
+/* Remove auto-filled markup for inputs */
+input[type="text"], input[type="password"], textarea, select { 
+    outline: none;
+}
+
+:focus { 
+	background-color: #ffffff; 
+}
+
+label{
+	font-weight: normal;
 }

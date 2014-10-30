@@ -1,8 +1,27 @@
-<div class="row">
+{% if user.is_authenticated %}
+<div class="row mini-accounts">
 	<div class="col-lg-10"></div>
 	<div class="col-lg-2">
-		<a href="accounts/login">login</a>
-		<a href="accounts/logout">logout</a>
-		<a href="accounts/signup">signup</a>
+		<form method="post" action="/accounts/logout/">
+		{% csrf_token %}
+		<span class="user-markup">{{ user.username }}</span>
+		  <button type="submit" class="account-top">Afmelden</button>
+		</form>
 	</div>
 </div>
+{% else %}
+<div class="row mini-accounts">
+	<div class="col-lg-7"></div>
+	<div class="col-lg-5">
+		<form class="login" method="POST" action="/accounts/login/">
+			{% csrf_token %}
+			<input autofocus="autofocus" id="id_login" maxlength="30" name="login" placeholder="Gebruikersnaam" type="text">
+			<input id="id_password" name="password" placeholder="Wachtwoord" type="password">
+			<input id="id_remember" name="remember" type="checkbox">
+			<label for="id_remember">Onthouden</label>
+			<button class="account-top" type="submit">Aanmelden</button>
+			<a href="/accounts/signup/" class="account-top">Registreren</a>			
+		</form>
+	</div>
+</div>		
+{% endif %}

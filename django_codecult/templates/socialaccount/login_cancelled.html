@@ -7,12 +7,15 @@
 {% block head_title %}{% trans "Login Cancelled" %}{% endblock %}
 
 {% block content %}
-    
-<h1>{% trans "Login Cancelled" %}</h1>
+<div class="row first">
+	<div class="col-lg-4"></div>
+	<div class="block-accounts col-lg-4">
+		<h1>{% trans "Login Cancelled" %}</h1>
+		{% url 'account_login' as login_url %}
 
-{% url 'account_login' as login_url %}
-
-<p>{% blocktrans %}You decided to cancel logging in to our site using one of your existing accounts. If this was a mistake, please proceed to <a href="{{login_url}}">sign in</a>.{% endblocktrans %}</p>
-
+		<p>{% blocktrans %}Je hebt het aanmelden op deze site met een externe account geannuleerd. Als dat een vergissing was, kun je je <a class="accounts-link" href="{{login_url}}">aanmelden</a>.{% endblocktrans %}</p>
+	</div>
+	<div class="col-lg-4"></div>
+</div>
 {% endblock %}
 {% endblock body %}
