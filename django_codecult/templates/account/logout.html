@@ -1,0 +1,28 @@
+{% extends "main_base.html" %}
+
+{% load url from future %}
+{% load i18n %}
+{% block body %}
+{% block head_title %}{% trans "Uitloggen" %}{% endblock %}
+
+{% block content %}
+<div class="row first">
+	<div class="col-lg-4"></div>
+	<div class="block-accounts col-lg-4">
+		<h1>{% trans "Uitloggen" %}</h1>
+
+		<p>{% trans 'Weet je zeker dat je uit wilt loggen?' %}</p>
+
+		<form method="post" action="{% url 'account_logout' %}">
+		  {% csrf_token %}
+		  {% if redirect_field_value %}
+		  <input type="hidden" name="{{redirect_field_name}}" value="{{redirect_field_value}}"/>
+		  {% endif %}
+		  <button type="submit" class="account">{% trans 'Log uit' %}</button>
+		</form>
+	</div>
+	<div class="col-lg-4"></div>
+</div>
+
+{% endblock %}
+{% endblock body %}
