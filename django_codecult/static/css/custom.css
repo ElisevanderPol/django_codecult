@@ -251,3 +251,7 @@ input[type="text"], input[type="password"], textarea, select {
 label{
 	font-weight: normal;
 }
+
+.center{
+	text-align: center;
+}

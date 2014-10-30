@@ -4,7 +4,7 @@
 	<div class="col-lg-2">
 		<form method="post" action="/accounts/logout/">
 		{% csrf_token %}
-		<span class="user-markup">{{ user.username }}</span>
+		<span class="user-markup">Welkom, <a href="/profile/{{user.username}}" class="account-top">{{ user.username }}</a>.</span>
 		  <button type="submit" class="account-top">Afmelden</button>
 		</form>
 	</div>

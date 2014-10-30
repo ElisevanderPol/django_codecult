@@ -1,0 +1,24 @@
+{% extends "main_base.html" %}
+
+{% load staticfiles %}
+
+{% block body %}
+
+<div class="row first">
+	<div class="col-lg-2"></div>
+	<div class="col-lg-8 center">
+		<h1>Gebruikersinformatie voor {{ user.username }}</h1>
+		{% if user.first_name %}
+		<div><span>Voornaam: {{ user.first_name }}</span></div>
+		{% endif %}
+		{% if user.last_name %}
+		<div><span>Achternaam: {{ user.last_name }}</span></div>
+		{% endif %}
+		{% if user.email %}
+		<div><span>E-mail: {{ user.email }}</span></div>
+		{% endif %}
+	</div>
+	<div class="col-lg-2"></div>
+</div>
+
+{% endblock body %}

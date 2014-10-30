@@ -4,16 +4,13 @@ from django_codecult.models import *
 from django.contrib.auth import authenticate, login
 
 def home(request):
-	page_list = Page.objects.all()
 	page = Index.objects.all()
 	block_list = page[0].blocks.all()
 	return render(request, 'index.html', {
-		'pages': page_list,
 		'block_list': block_list,
 		})
 
 def info(request, page_title):
-	page_list = Page.objects.all()
 	page = Page.objects.get(title=page_title)
 	block_list = page.blocks.all()
 	block_list_tuples = []
@@ -23,7 +20,13 @@ def info(request, page_title):
 		elif(i%2 == 0):
 			block_list_tuples.append([block_list[i]])
 	return render(request, 'page.html', {
-		'pages': page_list,
 		'page': page,
 		'block_list': block_list,
 		})
+
+def profile(request, user_name):
+	user = User.objects.get(username=user_name)
+	return render(request, 'profile.html', {
+		'user': user
+		})
+
