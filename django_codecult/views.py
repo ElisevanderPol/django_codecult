@@ -24,10 +24,11 @@ def info(request, page_title):
 		'block_list': block_list,
 		})
 
-def profile(request, user_name):
+def profile(request, user_name, message=None):
 	user = User.objects.get(username=user_name)
 	return render(request, 'profile.html', {
-		'user': user
+		'user': user,
+		'message': message,
 		})
 
 def update_info(request):
@@ -35,13 +36,20 @@ def update_info(request):
 		first_name = request.POST.get('first_name', None)
 		last_name = request.POST.get('last_name', None)
 		email = request.POST.get('email', None)
+		message = []
 		if(len(first_name) > 0):
 			request.user.first_name = first_name
+			message.append("<span class='field'>Voornaam</span> is veranderd naar <span class='value'>" + first_name + ".</span>")
 		if(len(last_name) > 0):
 			request.user.last_name = last_name
+			message.append("<span class='field'>Achternaam</span> is veranderd naar <span class='value'>" + last_name + ".</span>")
 		if(len(email) > 0):
 			request.user.email = email
+			message.append("<span class='field'>E-mail</span> is veranderd naar <span class='value'>" + email + ".</span>")
 		request.user.save()
+	if(len(message) < 1):
+		message.append("Alle velden zijn leeg.")
 	return render(request, 'profile.html', {
-		'user':request.user
+		'user':request.user,
+		'message':message
 		})

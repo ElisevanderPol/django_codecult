@@ -1,6 +1,45 @@
-<ul class="nav nav-justified">
-  <li class="page-button navigation-big"><a class="page-button" href="/">Code Cult</a></li>
-  {% for page in pages %}
-    <li class="page-button"><a class="page-button" href="{% url 'django_codecult.views.info' page.title %}">{{page.title}}</a></li>
-  {% endfor %}
-</ul>
+<div class="row">
+	<div class="col-lg-1"></div>
+	<div class="col-lg-2">
+		<span class="page-button navigation-big"><a class="page-button" href="/">Code Cult</a></span>
+	</div>
+	<div class="col-lg-1"></div>
+	<div class="col-lg-5">
+		<ul class="nav nav-justified">
+		  {% for page in pages %}
+		    <li class="page-button"><a class="page-button" href="{% url 'django_codecult.views.info' page.title %}">{{page.title}}</a></li>
+		  {% endfor %}
+		</ul>
+	</div>
+	<div class="col-lg-3">
+	{% if user.is_authenticated %}
+	<div class="row mini-accounts">
+		<div class="col-lg-1"></div>
+		<div class="col-lg-10">
+			<form method="post" action="/accounts/logout/">
+			{% csrf_token %}
+			<span class="user-markup">Welkom, <a href="/profile/{{user.username}}" class="account-top">{{ user.username }}</a>.</span>
+			  <button type="submit" class="account-top">Afmelden</button>
+			</form>
+		</div>
+		<div class="col-lg-1"></div>
+	</div>
+	{% else %}
+	<div class="row mini-accounts">
+		<div class="col-lg-1"></div>
+		<div class="col-lg-10">
+			<form class="login" method="POST" action="/accounts/login/">
+				{% csrf_token %}
+				<input autofocus="autofocus" id="id_login" maxlength="30" name="login" placeholder="Gebruikersnaam" type="text">
+				<input id="id_password" name="password" placeholder="Wachtwoord" type="password">
+				<input id="id_remember" name="remember" type="checkbox">
+				<label for="id_remember">Onthouden</label>
+				<button class="account-top" type="submit">Aanmelden</button>
+				<a href="/accounts/signup/" class="account-top">Registreren</a>			
+			</form>
+		</div>
+		<div class="col-lg-1"></div>
+	</div>		
+{% endif %}
+</div>
+</div>
