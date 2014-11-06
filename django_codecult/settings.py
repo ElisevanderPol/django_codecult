@@ -133,5 +133,5 @@ SOCIALACCOUNT_PROVIDERS = {
         'METHOD': 'js_sdk'
     }
 }
-
+ACCOUNT_EMAIL_REQUIRED = True
 

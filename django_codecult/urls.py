@@ -14,4 +14,5 @@ urlpatterns = patterns('',
     url(r'^profile/(?P<user_name>\w+)$', 'django_codecult.views.profile', name='profile'),
     url(r'^summernote/', include('django_summernote.urls')),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^update_info', 'django_codecult.views.update_info', name='update_info'),
 )

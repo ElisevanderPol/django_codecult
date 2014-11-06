@@ -18,12 +18,12 @@
     <p>{% blocktrans with site.name as site_name %}Meld je aan met een van je externe accounts. Of, <a class="accounts-link" href="{{ signup_url }}">registreer</a>
     voor een {{site_name}} account en meld je hieronder aan:{% endblocktrans %}</p>
 
-    <div class="socialaccount_ballot">
+    <!--<div class="socialaccount_ballot">
         {% include "socialaccount/snippets/provider_list.html" with process="login" %}
       <div class="login-or">{% trans 'or' %}</div>
     </div>
 
-    {% include "socialaccount/snippets/login_extra.html" %}
+    {% include "socialaccount/snippets/login_extra.html" %}-->
 
     {% else %}
     <p>{% blocktrans %}If you have not created an account yet, then please

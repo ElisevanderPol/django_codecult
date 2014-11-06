@@ -8,15 +8,18 @@
 	<div class="col-lg-2"></div>
 	<div class="col-lg-8 center">
 		<h1>Gebruikersinformatie voor {{ user.username }}</h1>
-		{% if user.first_name %}
-		<div><span>Voornaam: {{ user.first_name }}</span></div>
-		{% endif %}
-		{% if user.last_name %}
-		<div><span>Achternaam: {{ user.last_name }}</span></div>
-		{% endif %}
-		{% if user.email %}
-		<div><span>E-mail: {{ user.email }}</span></div>
-		{% endif %}
+		
+		<div><span>Voornaam: {% if user.first_name %}{{ user.first_name }}{% else %} je hebt geen voornaam opgegeven!{% endif %}</span></div>
+		<div><span>Achternaam: {% if user.last_name %}{{ user.last_name }}{% else %} je hebt geen achternaam opgegeven!{% endif %}</span></div>
+		<div><span>E-mail: {% if user.email %}{{ user.email }}{% else %} je hebt geen e-mailadres opgegeven!{% endif %}</span></div>
+		<h2>Informatie toevoegen of aanpassen</h2>
+		<form method="POST" action="../update_info">
+			{% csrf_token %}
+        	<input id="first_name" type="text" name="first_name" placeholder="Voornaam"></input><br />
+        	<input id="last_name" type="text" name="last_name" placeholder="Achternaam"></input><br />
+        	<input id="email" type="text" name="email" placeholder="E-mail"></input><br />
+        	<button type="submit">Aanpassen</button>
+        </form>
 	</div>
 	<div class="col-lg-2"></div>
 </div>

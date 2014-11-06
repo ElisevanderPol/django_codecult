@@ -30,3 +30,15 @@ def profile(request, user_name):
 		'user': user
 		})
 
+def update_info(request):
+	if(request.method=="POST"):
+		first_name = request.POST.get('first_name', None)
+		last_name = request.POST.get('last_name', None)
+		email = request.POST.get('email', None)
+		if(len(first_name) > 0):
+			request.user.first_name = first_name
+		if(len(last_name) > 0):
+			request.user.last_name = last_name
+		if(len(email) > 0):
+			request.user.email = email
+		request.user.save()
