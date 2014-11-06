@@ -42,3 +42,6 @@ def update_info(request):
 		if(len(email) > 0):
 			request.user.email = email
 		request.user.save()
+	return render(request, 'profile.html', {
+		'user':request.user
+		})

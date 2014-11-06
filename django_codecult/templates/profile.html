@@ -15,9 +15,9 @@
 		<h2>Informatie toevoegen of aanpassen</h2>
 		<form method="POST" action="../update_info">
 			{% csrf_token %}
-        	<input id="first_name" type="text" name="first_name" placeholder="Voornaam"></input><br />
-        	<input id="last_name" type="text" name="last_name" placeholder="Achternaam"></input><br />
-        	<input id="email" type="text" name="email" placeholder="E-mail"></input><br />
+        	<input id="first_name" type="text" name="first_name" placeholder="{{user.first_name}}"></input><br />
+        	<input id="last_name" type="text" name="last_name" placeholder="{{user.last_name}}"></input><br />
+        	<input id="email" type="email" name="email" placeholder="{{user.email}}"></input><br />
         	<button type="submit">Aanpassen</button>
         </form>
 	</div>
