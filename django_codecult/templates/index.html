@@ -91,7 +91,7 @@
 			<div class="row">
 				<div class="col-lg-2"></div>
 				<div class="col-lg-8">
-					<span id="image-visible" class="0">
+					<span id="image-visible-{{ block.image_slider.pk }}" class="0-{{ block.image_slider.pk }}">
 						<img id="image-slider-img" src="{{ block.image_slider.get_image_urls.0 }}">
 					</span>
 				</div>
@@ -102,9 +102,15 @@
 				<div class="col-lg-2"></div>
 				<div class="col-lg-8">
 					{% for i in block.image_slider.get_image_urls %}
-						<div id="{{ forloop.counter0 }}" class="slider-button"> {{ forloop.counter }}  
+						{% if not forloop.counter0 %}
+							<div id="{{ forloop.counter0 }}-{{ block.image_slider.pk }}" class="slider-button selected-button"> {{ forloop.counter }}  
+								<img src="{{ i }}" class="hide"> 
+							</div>
+						{% else %}
+						<div id="{{ forloop.counter0 }}-{{ block.image_slider.pk }}" class="slider-button"> {{ forloop.counter }}  
 							<img src="{{ i }}" class="hide"> 
 						</div>
+						{% endif %}
 					{% endfor %}
 				</div>
 				<div class="col-lg-2"></div>
