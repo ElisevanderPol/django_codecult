@@ -26,9 +26,11 @@ def info(request, page_title):
 
 def profile(request, user_name, message=None):
 	user = User.objects.get(username=user_name)
+	profile = UserProfile.objects.get(user=user)
 	return render(request, 'profile.html', {
 		'user': user,
 		'message': message,
+		'profile':profile,
 		})
 
 def update_info(request):
@@ -36,6 +38,7 @@ def update_info(request):
 		first_name = request.POST.get('first_name', None)
 		last_name = request.POST.get('last_name', None)
 		email = request.POST.get('email', None)
+		languages = request.POST.get('languages', None)
 		message = []
 		if(len(first_name) > 0):
 			request.user.first_name = first_name
@@ -46,10 +49,43 @@ def update_info(request):
 		if(len(email) > 0):
 			request.user.email = email
 			message.append("<span class='field'>E-mail</span> is veranderd naar <span class='value'>" + email + ".</span>")
+		if(len(languages) > 0):
+			profile = UserProfile.objects.get(user=request.user)
+			languages = set(languages.split(","))
+			print languages
+			language_list=""
+			language_array =[]
+			for lang in languages:
+				lang = lang.strip().lower()
+				if(lang not in language_array):
+					language_array.append(lang)
+					try:
+						lang_obj = Language.objects.get(name=lang)
+					except Language.DoesNotExist:
+						lang = lang.strip().lower()
+						lang_obj = Language(name=lang)
+						lang_obj.save()
+					profile.languages.add(lang_obj)
+					profile.save()
+					language_list += str(lang_obj.name) + ", "
+			message.append("De volgende <span class='field'>programmeertalen</span> zijn toegevoegd: <span class'value'>" + str(language_list[:-2]) +".</span>")
 		request.user.save()
 	if(len(message) < 1):
 		message.append("Alle velden zijn leeg.")
 	return render(request, 'profile.html', {
 		'user':request.user,
-		'message':message
+		'message':message,
+		'profile':profile,
+		})
+
+def remove_language(request):
+	if(request.method=="POST"):
+		language = request.POST.get('language', None).strip().lower()
+		profile = UserProfile.objects.get(user=request.user)
+		lang_obj = Language.objects.get(name=language)
+		profile.languages.remove(lang_obj)
+	return render(request, 'profile.html', {
+		'user': request.user,
+		'message': "",
+		'profile': profile,
 		})

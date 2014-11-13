@@ -11,18 +11,20 @@
 			<div class="col-lg-3"></div>
 		</div>
 		<div class="row">
-			<div class="col-lg-5"></div>
-			<div class="col-lg-1 right">
+			<div class="col-lg-1"></div>
+			<div class="col-lg-5 right">
 				Voornaam: <br />
 				Achternaam: <br />
 				E-mail: <br />
+				Favoriete programmeertalen: <br />
 			</div>
-			<div class="col-lg-1 left">
-				{% if user.first_name %}{{ user.first_name }}{% else %} je hebt geen voornaam opgegeven!{% endif %}<br/>
-				{% if user.last_name %}{{ user.last_name }}{% else %} je hebt geen achternaam opgegeven!{% endif %}<br/>
-				{% if user.email %}{{ user.email }}{% else %} je hebt geen e-mailadres opgegeven!{% endif %}<br/>
+			<div class="col-lg-5 left">
+				{% if user.first_name %}{{ user.first_name }}{% else %} niet ingevuld{% endif %}<br/>
+				{% if user.last_name %}{{ user.last_name }}{% else %} niet ingevuld {% endif %}<br/>
+				{% if user.email %}{{ user.email }}{% else %} niet ingevuld{% endif %}<br/>
+				{% if profile.languages.all %}{% for language in profile.languages.all %}  <form method="POST" action="../remove_language" class="tag-remover">{% csrf_token %} <input id="language" type="hidden" name="language" label="taal" value="{{language}}"></input><span class='pl' id ="{{language}}">{{ language }} <button type="submit" class="top-cross">x</button></span></form>{% endfor %}{% else %} niet ingevuld {% endif %}<br/>
 			</div>
-			<div class="col-lg-5"></div>
+			<div class="col-lg-1"></div>
 		</div>
 	</div>
 	
@@ -33,22 +35,24 @@
 			<div class="col-lg-3"></div>
 		</div>
 		<div class="row">
-			<div class="col-lg-5"></div>
-			<div class="col-lg-1 right">
+			<div class="col-lg-1"></div>
+			<div class="col-lg-5 right">
 				Voornaam: <br />
 				Achternaam: <br />
 				E-mail: <br />
+				Favoriete programmeertalen: <br />
 			</div>
-			<div class="col-lg-1">
+			<div class="col-lg-5 left">
 				<form method="POST" action="../update_info">
 				{% csrf_token %}
 					<input id="first_name" type="text" name="first_name" label="Voornaam" placeholder="{{user.first_name}}"></input><br />
 					<input id="last_name" type="text" name="last_name" label="Achternaam" placeholder="{{user.last_name}}"></input><br />
 					<input id="email" type="email" name="email" label="E-mail" placeholder="{{user.email}}"></input><br />
+					<input id="languages" type="text" name="languages" label="Talen" placeholder="{{profile.languages.all}}"></input><br/>
 					<button type="submit">Aanpassen</button>
 				</form>
 			</div>
-			<div class="col-lg-5"></div>
+			<div class="col-lg-1"></div>
 		</div>
 		<div class="row">
 			<div class="col-lg-5"></div>

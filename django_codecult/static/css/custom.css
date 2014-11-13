@@ -1,3 +1,36 @@
+.pl{
+	/*border: 1px dotted gray;*/
+	text-align: center;
+	border-radius: 3px;
+	background-color: #ffffff;
+	color: #18bc9c;
+	padding: 1px;
+	margin:1px;
+	box-shadow: -1px 2px 1px #138F77;
+}
+
+.remover{
+	color: #2c3e50;
+	position:relative;
+	top:-3px;
+	right:1px;
+}
+
+.top-cross{
+	background-color: #ffffff;
+	color: #2c3e50;
+	border:0;
+	font-size: 75%;
+	padding:0;
+	margin:0;
+	position: relative;
+	top:-3px;
+}
+.tag-remover{
+	margin:0;
+	padding:0;
+	display: inline;
+}
 /* Styling of custom page blocks */
 .block {
 	text-align: center;

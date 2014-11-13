@@ -15,4 +15,5 @@ urlpatterns = patterns('',
     url(r'^summernote/', include('django_summernote.urls')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^update_info', 'django_codecult.views.update_info', name='update_info'),
+    url(r'^remove_language', 'django_codecult.views.remove_language', name='remove_language'),
 )

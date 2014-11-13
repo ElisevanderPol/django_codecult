@@ -1,6 +1,25 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class Language(models.Model):
+	name = models.CharField(max_length=50, unique=True)
+
+	def __repr__(self):
+		capitalized_name = self.name[0].upper()+self.name[1:]
+		return '%s' % (capitalized_name)
+
+	def __unicode__(self):
+		capitalized_name = self.name[0].upper()+self.name[1:]
+		return unicode(capitalized_name)
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, unique=True)
+    languages = models.ManyToManyField('Language', blank=True, related_name='users')
+    profile_image = models.URLField(null=True, max_length=255, blank=True)
+
+    def get_image_url(self):
+    	return self.profile_image
+
 class Listblock(models.Model):
 	title = models.CharField(null=True, max_length=255)
 	pro = models.TextField(null=True, blank=True)

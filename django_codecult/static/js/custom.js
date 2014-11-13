@@ -21,6 +21,10 @@ $(".slider-button").click(function(){
 	$(this).attr('class', 'selected-button slider-button');
 })
 
+$(".remover").click(function(){
+	console.log("removed");
+})
+
 $(document).ready(function(){
 	$('#0').attr('class', 'selected-button slider-button');
 })

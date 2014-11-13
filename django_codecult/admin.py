@@ -17,5 +17,7 @@ admin.site.register(Page, AdminPage)
 admin.site.register(Index, AdminIndex)
 admin.site.register(Imageslider)
 admin.site.register(Contactbuttons)
+admin.site.register(UserProfile)
+admin.site.register(Language)
 
 
