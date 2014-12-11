@@ -24,9 +24,22 @@ def info(request, page_title):
 		'block_list': block_list,
 		})
 
-def profile(request, user_name, message=None):
+def change_profile(request, user_name):
 	user = User.objects.get(username=user_name)
 	profile = UserProfile.objects.get(user=user)
+	languages = profile.languages.all()
+	language_string = ""
+	for language in languages:
+		language_string += str(language) + ", "
+	return render(request, 'change_profile.html',{
+		'user': user,
+		'profile': profile,
+		'languages': language_string,
+		})
+
+def profile(request, user_name, message=None):
+	user = User.objects.get(username=user_name)
+	profile, created = UserProfile.objects.get_or_create(user=user)
 	return render(request, 'profile.html', {
 		'user': user,
 		'message': message,
@@ -39,6 +52,7 @@ def update_info(request):
 		last_name = request.POST.get('last_name', None)
 		email = request.POST.get('email', None)
 		languages = request.POST.get('languages', None)
+		profile = UserProfile.objects.get(user=request.user)
 		message = []
 		if(len(first_name) > 0):
 			request.user.first_name = first_name
@@ -50,21 +64,14 @@ def update_info(request):
 			request.user.email = email
 			message.append("<span class='field'>E-mail</span> is veranderd naar <span class='value'>" + email + ".</span>")
 		if(len(languages) > 0):
-			profile = UserProfile.objects.get(user=request.user)
 			languages = set(languages.split(","))
-			print languages
 			language_list=""
 			language_array =[]
 			for lang in languages:
 				lang = lang.strip().lower()
 				if(lang not in language_array):
 					language_array.append(lang)
-					try:
-						lang_obj = Language.objects.get(name=lang)
-					except Language.DoesNotExist:
-						lang = lang.strip().lower()
-						lang_obj = Language(name=lang)
-						lang_obj.save()
+					lang_obj,created = Language.objects.get_or_create(name=lang)
 					profile.languages.add(lang_obj)
 					profile.save()
 					language_list += str(lang_obj.name) + ", "

@@ -25,25 +25,57 @@
 
 		<!-- Title of block -->
 		<div class="row">
-			<div class="col-lg-3"></div>
-			<div class="block-title col-lg-6"> {{ block.title }} </div>
-			<div class="col-lg-3"></div>
+			<div class="col-lg-2"></div>
+			<div class="block-title col-lg-8"> {{ block.title }} </div>
+			<div class="col-lg-2"></div>
 		</div>
+
+		<!-- if there is an image teaser -->
+		{% if block.image_teaser %}
+			<div class="row">
+				<div class="col-lg-3">
+					<img src="{{ block.image_teaser.first_image}}" class="img-responsive-small">
+					<div class="image-teaser">{{ block.image_teaser.first_teaser }}</div>
+				</div>
+				<div class="col-lg-3">
+					<img src="{{ block.image_teaser.second_image}}" class="img-responsive-small">
+					<div class="image-teaser">{{ block.image_teaser.second_teaser }}</div>
+				</div>
+				<div class="col-lg-3">
+					<img src="{{ block.image_teaser.third_image}}" class="img-responsive-small">
+					<div class="image-teaser">{{ block.image_teaser.third_teaser }}</div>
+				</div>
+				<div class="col-lg-3">
+					<img src="{{ block.image_teaser.fourth_image}}" class="img-responsive-small">
+					<div class="image-teaser">{{ block.image_teaser.fourth_teaser }}</div>
+				</div>
+			</div>
+		{% endif %}
 
 		<!-- If there is text in the block -->
 		{% if block.description %}
 			<div class="row">
-				<div class="col-lg-3"></div>
-				<div class="block-description col-lg-6"> {{ block.description |safe }} </div>
-				<div class="col-lg-3"></div>
+				<div class="col-lg-2"></div>
+				<div class="block-description col-lg-8"> {{ block.description |safe }} </div>
+				<div class="col-lg-2"></div>
 			</div>
 		{% endif %}
 
-		<!-- If there are contact urls -->
 		{% if block.contact_buttons %}
-			{% for button in block.contact_buttons %}
-				<a href="">click here</a>
-			{% endfor %}
+		<br>
+			<ul class="list-inline bigger-buttons">
+				{% if forloop.counter0|divisibleby:"2" %}
+					<li><a href="{{ block.contact_buttons.facebook }}" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a></li>
+					<li><a href="{{ block.contact_buttons.twitter }}" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a></li>
+					<li><a href="{{ block.contact_buttons.gplus }}" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a></li>
+					<li><a href="{{ block.contact_buttons.mail }}" target="_blank" class="btn-social btn-outline"><i class ="fa fa-fw fa-envelope"></i></a></li>
+				{% else %}
+					<li><a href="{{ block.contact_buttons.facebook }}" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a></li>
+					<li><a href="{{ block.contact_buttons.twitter }}" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a></li>
+					<li><a href="{{ block.contact_buttons.gplus }}" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a></li>
+					<li><a href="{{ block.contact_buttons.mail }}" target="_blank" class="btn-social btn-outline"><i class ="fa fa-fw fa-envelope"></i></a></li>
+				{% endif %}
+			</ul>
 		{% endif %}
 
 		<!-- If there is a pro/con list -->

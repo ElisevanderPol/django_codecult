@@ -1,1 +1,30 @@
+{% if user.is_authenticated %}
+<div class="row center account-area">
+		<form method="post" action="/accounts/logout/" role="form" class="form-inline">
+		{% csrf_token %}
+			<span class="user-markup">Welkom, <a href="{% url 'profile' user.username %}" class="account-top">{{ user.username }}</a>.</span>
+			<button type="submit" class="account-top">Afmelden</button>
+		</form>
+	</div>
+{% else %}
+<div class="row center account-area">
+		<form class="form-inline" method="POST" action="{% url 'account_login' %}" role="form">
+			{% csrf_token %}
+			<div class="form-group">
+				<label for="id_login">Gebruikersnaam:</label>
+				<input autofocus="autofocus" id="id_login" maxlength="30" name="login" placeholder="Gebruikersnaam" type="text"></input>
+			</div>
+			<div class="form-group">
+				<label for="id_password">Wachtwoord:</label>
+				<input id="id_password" name="password" placeholder="Wachtwoord" type="password"></input>
+			</div>
+			<div class="checkbox">
+				<label for="id_remember">Onthouden</label>
+				<input id="id_remember" name="remember" type="checkbox"></input>
+			</div>
+			<button class="account-top" type="submit">Aanmelden</button>
+			<a href="{% url 'account_signup' %}" class="account-top">Registreren</a>			
+		</form>
+</div>
+{% endif %}
 <div class="container"> Initiatief van <a class="footer-link" href="http://www.perceptum.nl">Perceptum</a></div>

@@ -19,5 +19,6 @@ admin.site.register(Imageslider)
 admin.site.register(Contactbuttons)
 admin.site.register(UserProfile)
 admin.site.register(Language)
+admin.site.register(ImageTeaser)
 
 

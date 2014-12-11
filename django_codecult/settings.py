@@ -134,4 +134,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 ACCOUNT_EMAIL_REQUIRED = True
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

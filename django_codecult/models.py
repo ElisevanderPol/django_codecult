@@ -12,6 +12,23 @@ class Language(models.Model):
 		capitalized_name = self.name[0].upper()+self.name[1:]
 		return unicode(capitalized_name)
 
+class ImageTeaser(models.Model):
+	name = models.CharField(null=True, max_length=255)
+	first_image = models.URLField(null=True, max_length=255, blank=True)
+	first_teaser = models.TextField(null=True, blank=True)
+	second_image = models.URLField(null=True, max_length=255, blank=True)
+	second_teaser = models.TextField(null=True, blank=True)
+	third_image = models.URLField(null=True, max_length=255, blank=True)
+	third_teaser = models.TextField(null=True, blank=True)
+	fourth_image = models.URLField(null=True, max_length=255, blank=True)
+	fourth_teaser = models.TextField(null=True, blank=True)
+
+	def __repr__(self):
+		return '%s' % (self.name)
+
+	def __unicode__(self):
+		return unicode(self.name)
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, unique=True)
     languages = models.ManyToManyField('Language', blank=True, related_name='users')
@@ -42,7 +59,7 @@ class Contactbuttons(models.Model):
 	facebook = models.URLField(null=True, max_length=255, blank=True)
 	twitter = models.URLField(null=True, max_length=255, blank=True)
 	gplus = models.URLField(null=True, max_length=255, blank=True)
-	mail = models.URLField(null=True, max_length=255, blank=True)
+	mail = models.EmailField(null=True, max_length=255, blank=True)
 	
 	def __repr__(self):
 		return '%s' % (self.title)
@@ -67,13 +84,13 @@ class Block(models.Model):
 	image = models.URLField(max_length=255, null=True, blank=True)
 	title = models.CharField(max_length=255)
 	description = models.TextField(null=True, blank=True)
-	form = models.BooleanField(default=False)
-	image_slider = models.BooleanField(default=False)
+	#form = models.BooleanField(default=False)
 	third_party = models.BooleanField(default=False)
 	href = "#" + str(title)
 	pro_con_list = models.ForeignKey(Listblock, blank=True, null=True)
 	image_slider = models.ForeignKey(Imageslider, blank=True, null=True)
 	contact_buttons = models.ForeignKey(Contactbuttons, blank=True, null=True)
+	image_teaser = models.ForeignKey(ImageTeaser, blank=True, null=True)
 
 	def __repr__(self):
 		return '%s' % (self.title)

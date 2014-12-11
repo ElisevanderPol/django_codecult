@@ -1,0 +1,48 @@
+{% extends "main_base.html" %}
+
+{% load staticfiles %}
+
+{% block body %}	
+	<div class="block first col-lg-12 center profile">
+		<div class="row">
+			<div class="col-lg-3"></div>
+			<div class="block-title col-lg-6"> Aanpassen</div>
+			<div class="col-lg-3"></div>
+		</div>
+		<div class="row left">
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6">
+				<form method="POST" action="{% url 'update_info' %}" role="form" class="change-profile">
+				{% csrf_token %}
+					<div class="form-group">
+						<label for="Voornaam">Voornaam: </label>
+						<input id="first_name" type="text" name="first_name" label="Voornaam" placeholder="{{user.first_name}}" class="form-control"></input>
+					</div>
+					<div class="form-group">
+						<label for="Achternaam">Achternaam: </label>
+						<input id="last_name" type="text" name="last_name" label="Achternaam" placeholder="{{user.last_name}}" class="form-control"></input>
+					</div>
+					<div class="form-group">
+						<label for="email">E-mail: </label>
+						<input id="email" type="email" name="email" label="E-mail" placeholder="{{user.email}}" class="form-control"></input>
+					</div>
+					<div class="form-group">
+						<label for="languages">Favoriete programmeertalen: </label>
+						<input id="languages" type="text" name="languages" label="Talen" placeholder="{{languages}}" class="form-control"></input>
+					</div>
+					<button type="submit" class="in-content">Aanpassen</button>
+				</form>
+			</div>
+			<div class="col-lg-3"></div>				
+		</div>
+		<div class="row">
+			<div class="col-lg-5"></div>
+			<div class="col-lg-4">
+			{% for part in message %}
+				<div class="alert-changes left">{{ part |safe}}</div>
+			{% endfor %}
+			</div>
+			<div class="col-lg-4"></div>
+		</div>
+    </div>
+{% endblock body %}    
