@@ -20,5 +20,7 @@ admin.site.register(Contactbuttons)
 admin.site.register(UserProfile)
 admin.site.register(Language)
 admin.site.register(ImageTeaser)
+admin.site.register(FancyUrl)
+admin.site.register(TeaserImage)
 
 

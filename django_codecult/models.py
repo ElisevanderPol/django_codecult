@@ -1,6 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class FancyUrl(models.Model):
+	name = models.CharField(max_length=50, unique=True)
+	url_string = models.URLField(max_length=255)
+
+	font_awesome_id = models.CharField(max_length=50)
+
+	def __repr__(self):
+		return '%s' % (self.name)
+
+	def __unicode__(self):
+		return unicode(self.name)	
+
 class Language(models.Model):
 	name = models.CharField(max_length=50, unique=True)
 
@@ -12,16 +24,23 @@ class Language(models.Model):
 		capitalized_name = self.name[0].upper()+self.name[1:]
 		return unicode(capitalized_name)
 
+class TeaserImage(models.Model):
+	name = models.CharField(null=True, max_length=255)
+	image_url = models.URLField(null=True, max_length=255, blank=True)
+	teaser_text = models.TextField(null=True, blank=True)
+
+	def __repr__(self):
+		return '%s' % (self.name)
+
+	def __unicode__(self):
+		return unicode(self.name)
+
 class ImageTeaser(models.Model):
 	name = models.CharField(null=True, max_length=255)
-	first_image = models.URLField(null=True, max_length=255, blank=True)
-	first_teaser = models.TextField(null=True, blank=True)
-	second_image = models.URLField(null=True, max_length=255, blank=True)
-	second_teaser = models.TextField(null=True, blank=True)
-	third_image = models.URLField(null=True, max_length=255, blank=True)
-	third_teaser = models.TextField(null=True, blank=True)
-	fourth_image = models.URLField(null=True, max_length=255, blank=True)
-	fourth_teaser = models.TextField(null=True, blank=True)
+	images_list = models.ManyToManyField(TeaserImage)
+
+	def get_teaser_images(self):
+		return self.images_list.all()
 
 	def __repr__(self):
 		return '%s' % (self.name)
@@ -69,10 +88,15 @@ class Contactbuttons(models.Model):
 
 class Imageslider(models.Model):
 	title = models.CharField(null=True, max_length=255)
-	images = models.TextField(null=True, blank=True)
+	images = models.ManyToManyField(TeaserImage)
+	show_teasers = models.BooleanField(default=False)
 
 	def get_image_urls(self):
-		return self.images.split(',')
+		all_images = self.images.all()
+		urls_list = []
+		for image in all_images:
+			urls_list.append(image.image_url)
+		return urls_list
 		
 	def __repr__(self):
 		return '%s' % (self.title)
@@ -83,14 +107,19 @@ class Imageslider(models.Model):
 class Block(models.Model):
 	image = models.URLField(max_length=255, null=True, blank=True)
 	title = models.CharField(max_length=255)
+	display_title = models.BooleanField(default=True)
 	description = models.TextField(null=True, blank=True)
 	#form = models.BooleanField(default=False)
-	third_party = models.BooleanField(default=False)
+	#third_party = models.BooleanField(default=False)
 	href = "#" + str(title)
 	pro_con_list = models.ForeignKey(Listblock, blank=True, null=True)
 	image_slider = models.ForeignKey(Imageslider, blank=True, null=True)
 	contact_buttons = models.ForeignKey(Contactbuttons, blank=True, null=True)
 	image_teaser = models.ForeignKey(ImageTeaser, blank=True, null=True)
+	fancy_url = models.ManyToManyField(FancyUrl, blank=True, null=True)
+
+	def get_fancy_urls(self):
+		return self.fancy_url.all()
 
 	def __repr__(self):
 		return '%s' % (self.title)

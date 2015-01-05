@@ -33,22 +33,12 @@
 		<!-- if there is an image teaser -->
 		{% if block.image_teaser %}
 			<div class="row">
-				<div class="col-lg-3">
-					<img src="{{ block.image_teaser.first_image}}" class="img-responsive-small">
-					<div class="image-teaser">{{ block.image_teaser.first_teaser }}</div>
+				{% for image in block.image_teaser.get_teaser_images %}
+				<div class="image-teaser-block">
+					<img src="{{ image.image_url }}" class="img-responsive-small">
+					<div class="image-teaser">{{ image.teaser_text }}</div>
 				</div>
-				<div class="col-lg-3">
-					<img src="{{ block.image_teaser.second_image}}" class="img-responsive-small">
-					<div class="image-teaser">{{ block.image_teaser.second_teaser }}</div>
-				</div>
-				<div class="col-lg-3">
-					<img src="{{ block.image_teaser.third_image}}" class="img-responsive-small">
-					<div class="image-teaser">{{ block.image_teaser.third_teaser }}</div>
-				</div>
-				<div class="col-lg-3">
-					<img src="{{ block.image_teaser.fourth_image}}" class="img-responsive-small">
-					<div class="image-teaser">{{ block.image_teaser.fourth_teaser }}</div>
-				</div>
+				{% endfor %}
 			</div>
 		{% endif %}
 
@@ -108,6 +98,30 @@
 			</div>
 		{% endif %}
 
+		{% if block.fancy_url %}
+		{% if forloop.counter0|divisibleby:"2" %}
+		<div class = "row">
+			<div class="col-lg-2"></div>
+			
+			<div class="col-lg-8">
+				{% for fancy_url in block.get_fancy_urls %}
+				<a href="{{fancy_url.url_string}}" class="fancy-url one"><i class="fa {{fancy_url.font_awesome_id}}"></i> {{fancy_url.name}}</a>
+				{% endfor %}
+				</div>
+			<div class="col-lg-2"></div>
+		</div>
+		{% else %}
+		<div class = "row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8">
+				{% for fancy_url in block.get_fancy_urls %}
+				<a href="{{fancy_url.url_string}}" class="fancy-url two"><i class="fa {{fancy_url.font_awesome_id}}"></i> {{fancy_url.name}}</a>
+				{% endfor %}
+				</div>
+			<div class="col-lg-2"></div>
+		</div>
+		{% endif %}
+		{% endif %}
 		<!-- If there is an image slider -->
 		{% if block.image_slider %}
 			<!-- Visible image -->
