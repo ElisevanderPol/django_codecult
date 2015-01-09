@@ -4,9 +4,11 @@ from django_codecult.models import *
 from django.contrib.auth import authenticate, login
 
 def home(request):
-	page = Index.objects.all()
-	block_list = page[0].blocks.all()
-	return render(request, 'index.html', {
+	pages = Page.objects.all()
+	for page in pages:
+		if page.home_page:
+			block_list = page.blocks.all()
+	return render(request, 'page.html', {
 		'block_list': block_list,
 		})
 

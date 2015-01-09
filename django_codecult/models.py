@@ -130,18 +130,10 @@ class Block(models.Model):
 class Page(models.Model):
 	title = models.CharField(max_length=255, unique=True)
 	blocks = models.ManyToManyField(Block)
+	home_page = models.BooleanField(default=False)
 
 	def __repr__(self):
 		return '%s' % (self.title)
 
 	def __unicode__(self):
-		return unicode(self.title)
-
-class Index(models.Model):
-	blocks = models.ManyToManyField(Block)
-
-	def __repr__(self):
-		return '%s' % ("index")
-
-	def __unicode__(self):
-		return unicode("index")		
+		return unicode(self.title)		

@@ -164,6 +164,7 @@ a.in-content:hover {
 	margin-right: auto;
 	padding-top:50px;
 	text-align: left;
+	margin-bottom: 30px
 }
 
 .accounts-link,.accounts-link:visited {
@@ -416,6 +417,7 @@ a.account-top:hover{
 /* Remove auto-filled markup for inputs */
 input[type="text"], input[type="password"], textarea, select { 
     outline: none;
+    color: #181818;
 }
 
 :focus { 

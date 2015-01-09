@@ -13,22 +13,23 @@
 	{% else %}
 		<div class="block second col-lg-12">
 	{% endif %}		
-
+	
+		<!-- Title of block -->
+		{% if block.display_title %}
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="block-title col-lg-8"> {{ block.title }} </div> 
+			<div class="col-lg-2"></div>
+		</div>
+		{% endif %}
 		<!-- If an image is provided -->
 		{% if block.image %}
 			<div class="row">
 				<div class="col-lg-3"></div>
-				<div class="decor-image img-responsive col-lg-6" ><img class="block-img" src = "{{ block.image }}"></div>
+				<div class="decor-image col-lg-6" ><img class="block-img" src = "{{ block.image }}"></div>
 				<div class="col-lg-3"></div>
 			</div>
 		{% endif %}
-
-		<!-- Title of block -->
-		<div class="row">
-			<div class="col-lg-2"></div>
-			<div class="block-title col-lg-8"> {{ block.title }} </div>
-			<div class="col-lg-2"></div>
-		</div>
 
 		<!-- if there is an image teaser -->
 		{% if block.image_teaser %}
@@ -51,6 +52,7 @@
 			</div>
 		{% endif %}
 
+		<!-- If there are contact buttons -->
 		{% if block.contact_buttons %}
 		<br>
 			<ul class="list-inline bigger-buttons">
@@ -67,6 +69,7 @@
 				{% endif %}
 			</ul>
 		{% endif %}
+
 
 		<!-- If there is a pro/con list -->
 		{% if block.pro_con_list %}
@@ -98,30 +101,7 @@
 			</div>
 		{% endif %}
 
-		{% if block.fancy_url %}
-		{% if forloop.counter0|divisibleby:"2" %}
-		<div class = "row">
-			<div class="col-lg-2"></div>
-			
-			<div class="col-lg-8">
-				{% for fancy_url in block.get_fancy_urls %}
-				<a href="{{fancy_url.url_string}}" class="fancy-url one"><i class="fa {{fancy_url.font_awesome_id}}"></i> {{fancy_url.name}}</a>
-				{% endfor %}
-				</div>
-			<div class="col-lg-2"></div>
-		</div>
-		{% else %}
-		<div class = "row">
-			<div class="col-lg-2"></div>
-			<div class="col-lg-8">
-				{% for fancy_url in block.get_fancy_urls %}
-				<a href="{{fancy_url.url_string}}" class="fancy-url two"><i class="fa {{fancy_url.font_awesome_id}}"></i> {{fancy_url.name}}</a>
-				{% endfor %}
-				</div>
-			<div class="col-lg-2"></div>
-		</div>
-		{% endif %}
-		{% endif %}
+
 		<!-- If there is an image slider -->
 		{% if block.image_slider %}
 			<!-- Visible image -->
@@ -152,6 +132,32 @@
 				</div>
 				<div class="col-lg-2"></div>
 			</div>
+		{% endif %}
+
+				<!-- If there are fancy urls -->
+		{% if block.fancy_url %}
+		{% if forloop.counter0|divisibleby:"2" %}
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8">
+				<br/>
+				{% for fancy_url in block.get_fancy_urls %}
+				<a href="{{fancy_url.url_string}}" class="fancy-url one"><i class="fa {{fancy_url.font_awesome_id}}"></i> {{fancy_url.name}}</a>
+				{% endfor %}
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+		{% else %}
+		<div class = "row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8">
+				{% for fancy_url in block.get_fancy_urls %}
+				<a href="{{fancy_url.url_string}}" class="fancy-url two"><i class="fa {{fancy_url.font_awesome_id}}"></i> {{fancy_url.name}}</a>
+				{% endfor %}
+				</div>
+			<div class="col-lg-2"></div>
+		</div>
+		{% endif %}
 		{% endif %}
 	</div>
 {% endfor %}
