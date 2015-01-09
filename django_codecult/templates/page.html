@@ -98,21 +98,27 @@
 		{% if block.user_display %}
 		<div class="row">
 			<div class="col-lg-2"></div>
-			<div class="col-lg-8">
+			<div class="col-lg-8 center">
 				{% for user in block.user_display.get_user_displays %}
-				<div class="user-display">
+				<div class="user-display">					
 					{% if user.profile_image %}
 						<img class="img-circle" height="90" width="90" src="{{ user.profile_image }}"></img>
 					{% else %}
 						<img class="img-cirlce" height="90" width="90" src="{% static 'img/default.png' %}"></img>
 					{% endif %}
+					<h3>{{user.user.first_name}} {{user.user.last_name}}</h3>
 					{% if user.about %}
 					<p> {{ user.about }}</p>
 					{% endif %}
 					{% if user.languages %}
-						<p>
+						<p class="languages">
 						{% for language in user.get_languages %}
-							{{ language }}
+							{% if forloop.last %}
+							<span>{{ language }}.</span>
+							{% else %}
+							<span>{{ language }},</span>
+							{% endif %}
+							</span>
 						{% endfor %}
 						</p>
 					{% endif %}

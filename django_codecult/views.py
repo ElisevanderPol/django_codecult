@@ -58,6 +58,7 @@ def update_info(request):
 		first_name = request.POST.get('first_name', None)
 		last_name = request.POST.get('last_name', None)
 		email = request.POST.get('email', None)
+		about = request.POST.get('about', None)
 		languages = request.POST.get('languages', None)
 		profile = UserProfile.objects.get(user=request.user)
 		message = []
@@ -70,6 +71,9 @@ def update_info(request):
 		if(len(email) > 0):
 			request.user.email = email
 			message.append("<span class='field'>E-mail</span> is veranderd naar <span class='value'>" + email + ".</span>")
+		if(len(about) > 0):
+			request.user.about = about
+			message.append("<span class='field'>Over mij</span> is veranderd naar <span class='value'>" + about + ".</span>")
 		if(len(languages) > 0):
 			languages = set(languages.split(","))
 			language_list=""

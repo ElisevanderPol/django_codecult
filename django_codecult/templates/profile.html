@@ -22,12 +22,14 @@
 				Voornaam: <br />
 				Achternaam: <br />
 				E-mail: <br />
+				Over mij: <br />				
 				Favoriete programmeertalen: <br />
 			</div>
 			<div class="col-lg-5 left">
 				{% if user.first_name %}{{ user.first_name }}{% else %} niet ingevuld{% endif %}<br/>
 				{% if user.last_name %}{{ user.last_name }}{% else %} niet ingevuld {% endif %}<br/>
-				{% if user.email %}{{ user.email }}{% else %} niet ingevuld{% endif %}<br/>
+				{% if user.email %}{{ user.email }}{% else %} niet ingevuld {% endif %}<br/>
+				{% if user.about %}{{ user.about }}{% else %} niet ingevuld {% endif %}<br/>
 				{% if profile.languages.all %}{% for language in profile.languages.all %}
 				<form method="POST" action="../remove_language" class="tag-remover">{% csrf_token %} <input id="language" type="hidden" name="language" label="taal" value="{{language}}"></input><span class='pl' id ="{{language}}">{{ language }} <button type="submit" class="top-cross">x</button></span></form>{% endfor %}{% else %} niet ingevuld {% endif %}<br/>
 				<button class="in-white-content"> <a href="{% url 'change_profile' user.username %}" class="in-content">Aanpassen</a></button>

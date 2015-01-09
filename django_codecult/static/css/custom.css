@@ -1,3 +1,13 @@
+.user-display {
+	display:inline-block;
+	margin: 20px;
+	padding: 20px;
+}
+
+.languages {
+	font-size: 1.1em;
+	font-style: italic;
+}
 
 button.in-content {
 	background-color: #18bc9c;
