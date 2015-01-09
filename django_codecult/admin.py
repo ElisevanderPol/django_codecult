@@ -18,5 +18,6 @@ admin.site.register(Language)
 admin.site.register(ImageTeaser)
 admin.site.register(FancyUrl)
 admin.site.register(TeaserImage)
+admin.site.register(UserDisplay)
 
 

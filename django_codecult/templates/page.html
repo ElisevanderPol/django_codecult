@@ -21,6 +21,11 @@
 			<div class="block-title col-lg-8"> {{ block.title }} </div> 
 			<div class="col-lg-2"></div>
 		</div>
+		{% if forloop.counter0|divisibleby:"2" %}
+		<div class="row"><hr class="light"/></div>
+		{% else %}
+		<div class="row"><hr class="dark"/></div>
+		{% endif %}
 		{% endif %}
 		<!-- If an image is provided -->
 		{% if block.image %}
@@ -54,20 +59,8 @@
 
 		<!-- If there are contact buttons -->
 		{% if block.contact_buttons %}
-		<br>
-			<ul class="list-inline bigger-buttons">
-				{% if forloop.counter0|divisibleby:"2" %}
-					<li><a href="{{ block.contact_buttons.facebook }}" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a></li>
-					<li><a href="{{ block.contact_buttons.twitter }}" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a></li>
-					<li><a href="{{ block.contact_buttons.gplus }}" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a></li>
-					<li><a href="{{ block.contact_buttons.mail }}" target="_blank" class="btn-social btn-outline"><i class ="fa fa-fw fa-envelope"></i></a></li>
-				{% else %}
-					<li><a href="{{ block.contact_buttons.facebook }}" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a></li>
-					<li><a href="{{ block.contact_buttons.twitter }}" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a></li>
-					<li><a href="{{ block.contact_buttons.gplus }}" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a></li>
-					<li><a href="{{ block.contact_buttons.mail }}" target="_blank" class="btn-social btn-outline"><i class ="fa fa-fw fa-envelope"></i></a></li>
-				{% endif %}
-			</ul>
+			<br>
+			{{ block.contact_buttons.insert_buttons }}
 		{% endif %}
 
 
@@ -101,6 +94,37 @@
 			</div>
 		{% endif %}
 
+		<!-- if there are users to be displayed -->
+		{% if block.user_display %}
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8">
+				{% for user in block.user_display.get_user_displays %}
+				<div class="user-display">
+					{% if user.profile_image %}
+						<img class="img-circle" height="90" width="90" src="{{ user.profile_image }}"></img>
+					{% else %}
+						<img class="img-cirlce" height="90" width="90" src="{% static 'img/default.png' %}"></img>
+					{% endif %}
+					{% if user.about %}
+					<p> {{ user.about }}</p>
+					{% endif %}
+					{% if user.languages %}
+						<p>
+						{% for language in user.get_languages %}
+							{{ language }}
+						{% endfor %}
+						</p>
+					{% endif %}
+					{% if user.social_buttons %}
+						{{ user.social_buttons.insert_buttons |safe}}
+					{% endif %}
+				</div>
+				{% endfor %}
+			</div>
+			<div class="col-lg-2"></div>
+
+		{% endif %}
 
 		<!-- If there is an image slider -->
 		{% if block.image_slider %}
@@ -134,7 +158,7 @@
 			</div>
 		{% endif %}
 
-				<!-- If there are fancy urls -->
+		<!-- If there are fancy urls -->
 		{% if block.fancy_url %}
 		{% if forloop.counter0|divisibleby:"2" %}
 		<div class="row">
@@ -151,6 +175,7 @@
 		<div class = "row">
 			<div class="col-lg-2"></div>
 			<div class="col-lg-8">
+				<br/>
 				{% for fancy_url in block.get_fancy_urls %}
 				<a href="{{fancy_url.url_string}}" class="fancy-url two"><i class="fa {{fancy_url.font_awesome_id}}"></i> {{fancy_url.name}}</a>
 				{% endfor %}

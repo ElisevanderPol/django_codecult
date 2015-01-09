@@ -8,9 +8,14 @@ def home(request):
 	for page in pages:
 		if page.home_page:
 			block_list = page.blocks.all()
-	return render(request, 'page.html', {
-		'block_list': block_list,
-		})
+	try:
+		return render(request, 'page.html', {
+			'block_list': block_list,
+			})
+	except UnboundLocalError:
+		return render(request, 'error.html', {
+			'message': "No index page has been specified for this site! Please create one using Django admin.</p>"
+			})
 
 def info(request, page_title):
 	page = Page.objects.get(title=page_title)

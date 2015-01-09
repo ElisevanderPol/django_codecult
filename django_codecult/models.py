@@ -48,13 +48,71 @@ class ImageTeaser(models.Model):
 	def __unicode__(self):
 		return unicode(self.name)
 
+class Contactbuttons(models.Model):
+	title = models.CharField(null=True, max_length=255)
+	facebook = models.URLField(null=True, max_length=255, blank=True)
+	twitter = models.URLField(null=True, max_length=255, blank=True)
+	gplus = models.URLField(null=True, max_length=255, blank=True)
+	mail = models.EmailField(null=True, max_length=255, blank=True)
+
+	def insert_buttons(self):
+		html_code = '<ul class="list-inline bigger-buttons">'
+		if(len(self.facebook)>0):
+			facebook_code = '<li><a href="'+self.facebook+'" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a></li>'
+		else:
+			facebook_code = ""
+		if(len(self.twitter)>0):
+			twitter_code = '<li><a href="'+self.twitter+'" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a></li>'
+		else:
+			twitter_code = ""
+		if(len(self.gplus)>0):
+			gplus_code = '<li><a href="'+self.gplus+'" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a></li>'
+		else:
+			gplus_code = ""
+		if(len(self.mail)>0):
+			mail_code = '<li><a href="'+self.mail+'" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-envelope"></i></a></li>'
+		else:
+			mail_code = ""
+		html_code += facebook_code + twitter_code + gplus_code + mail_code + "</ul>"
+		return html_code
+	
+	def __repr__(self):
+		return '%s' % (self.title)
+
+	def __unicode__(self):
+		return unicode(self.title)			
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, unique=True)
     languages = models.ManyToManyField('Language', blank=True, related_name='users')
     profile_image = models.URLField(null=True, max_length=255, blank=True)
+    about = models.TextField(null=True, blank=True)
+    social_buttons = models.ForeignKey(Contactbuttons, blank=True, null=True)
 
     def get_image_url(self):
     	return self.profile_image
+
+    def get_languages(self):
+    	return self.languages.all()
+
+	def __repr__(self):
+		return '%s' % (self.user.get_username())
+
+	def __unicode__(self):
+		return unicode(self.user.get_username())    	
+
+class UserDisplay(models.Model):
+	title = models.CharField(max_length=50, unique=True)
+	user_list = models.ManyToManyField(UserProfile)
+
+	def get_user_displays(self):
+		return self.user_list.all()
+
+	def __repr__(self):
+		return '%s' % (self.title)
+
+	def __unicode__(self):
+		return unicode(self.title)	
 
 class Listblock(models.Model):
 	title = models.CharField(null=True, max_length=255)
@@ -72,19 +130,6 @@ class Listblock(models.Model):
 
 	def __unicode__(self):
 		return unicode(self.title)
-
-class Contactbuttons(models.Model):
-	title = models.CharField(null=True, max_length=255)
-	facebook = models.URLField(null=True, max_length=255, blank=True)
-	twitter = models.URLField(null=True, max_length=255, blank=True)
-	gplus = models.URLField(null=True, max_length=255, blank=True)
-	mail = models.EmailField(null=True, max_length=255, blank=True)
-	
-	def __repr__(self):
-		return '%s' % (self.title)
-
-	def __unicode__(self):
-		return unicode(self.title)	
 
 class Imageslider(models.Model):
 	title = models.CharField(null=True, max_length=255)
@@ -109,14 +154,13 @@ class Block(models.Model):
 	title = models.CharField(max_length=255)
 	display_title = models.BooleanField(default=True)
 	description = models.TextField(null=True, blank=True)
-	#form = models.BooleanField(default=False)
-	#third_party = models.BooleanField(default=False)
 	href = "#" + str(title)
 	pro_con_list = models.ForeignKey(Listblock, blank=True, null=True)
 	image_slider = models.ForeignKey(Imageslider, blank=True, null=True)
 	contact_buttons = models.ForeignKey(Contactbuttons, blank=True, null=True)
 	image_teaser = models.ForeignKey(ImageTeaser, blank=True, null=True)
 	fancy_url = models.ManyToManyField(FancyUrl, blank=True, null=True)
+	user_display = models.ForeignKey(UserDisplay, blank=True, null=True)
 
 	def get_fancy_urls(self):
 		return self.fancy_url.all()
